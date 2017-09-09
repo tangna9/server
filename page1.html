@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>历史结果</title>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/lanrenzhijia.css" media="all">
+    <script>
+    jQuery(document).ready(function($) {
+        $("tbody tr").mouseover(function () {
+        $(this).attr("class", "active");
+        });
+        $("tbody tr").mouseout(function () {
+        $(this).removeClass("active");
+        });
+    });
+    </script>
+  </head>
+<body>
+    <div class="title-d head-d col-md-push-1" style="text-align: center"></div>
+    <div id="mm" style="margin-left: 135px">
+        <a href="/" ><img src="../static/pics/index_nevigator.jpg"></a>
+    </div>
+<div class="container">
+  <div style="margin-top:30px; border-bottom:1px solid #ddd">
+  <h2>历史结果</h2>
+  </div>
+  
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>检测时间</th>
+            <th>检测结果</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for i in p_result%}
+            <tr>
+            {%for j in i%}
+                {%if j=="PASS"%}
+                <td style="color: green">{{j}}
+                </td>
+                {%elif j=="FAIL"%}
+                <td style="color: red">{{j}}
+                </td>
+                {%else%}
+                <td>{{j}}
+                </td>
+                {%end%}
+            {% end %}
+             </tr>
+          {% end %}
+        </tbody>
+      </table>
+<!--       <div id="page_number">
+        <ul class="pagination">
+          <li>
+             <a href="#">Prev</a>
+          </li>
+          <li>
+             <a href="#">1</a>
+          </li>
+          <li>
+             <a href="#">2</a>
+          </li>
+          <li>
+             <a href="#">3</a>
+          </li>
+          <li>
+             <a href="#">4</a>
+          </li>
+          <li>
+             <a href="#">5</a>
+          </li>
+          <li>
+             <a href="#">Next</a>
+          </li>
+        </ul>
+      </div> -->
+
+  </div>
+</div>
+
+  
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>监控平台</title>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../static/css/lanrenzhijia.css" media="all">
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/my.jquery.js"></script>
+</head>
+
+<body>
+      <div class="head1">xxx</div>
+     <div class="title-d head-d" style="text-align: center;float: left;">
+     </div>
+     <div class="col-md-6" style="text-align: center" >
+            <address>
+            <strong>Created By 搜索部-测试部</strong>
+            <strong>有问题请联系</strong>
+            <a href="mailto:xiyucheng@dangdang.com">奚煜成</a>
+            <a href="mailto:tangna@dangdang.com">唐娜</a>
+            </address>
+    </div>
+     <div class="theme-popover-mask"></div>
+
+     <div class="container">
+      <div class="outer-d">
+        <div class="table_title">查询</div>
+        <div class="row" style="margin-top: 40px; margin-left: 10px">
+            <form method="get" name="searchform" role="form" class="form-horizontal">
+              <div class="form-group col-md-4">
+                 <label for="name" class="col-md-2 control-label">别名</label>
+                  <div class="col-md-6">
+                  <input type="text" class="form-control" id="name" name="name" value="{{name}}"/>
+                  </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="command" class="col-md-2 control-label col-md-pull-4">命令</label>
+                <div class="col-md-6 col-md-pull-4">
+                <select name="command" class="form-control" id="command">
+                  <option value="" {% if command =="" %} selected="selected" {% end %}></option>
+                  <option value="curl" {% if command =="curl" %} selected="selected" {% end %}>curl</option>
+                  <option value="telnet" {% if command =="telnet" %} selected="selected" {% end %}>telnet</option>
+                  <option value="ping" {% if command =="ping" %} selected="selected" {% end %}>ping</option>
+                </select>
+                </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="is_on" class="col-md-2 control-label col-md-pull-4">开关</label>
+                 <div class="col-md-6  col-md-pull-4">
+                <select name="is_on" class="form-control" id="is_on">
+                  <option value="" {% if is_on =="" %} selected="selected" {% end %}></option>
+                  <option value="1" {% if is_on =="1" %} selected="selected" {% end %}>开</option>
+                  <option value="0" {% if is_on =="0" %} selected="selected" {% end %}>关</option>
+                </select>
+                 </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                 <label for="host_url" class="col-md-2 control-label">服务</label>
+                  <div class="col-md-6">
+                  <input type="text" class="form-control" id="host_url" name="host_url" value="{{host_url}}"/>
+                  </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="status" class="col-md-2 control-label col-md-pull-4">状态</label>
+                <div class="col-md-6 col-md-pull-4">
+                <select name="status" class="form-control" id="status">
+                  <option value="" {% if status =="" %} selected="selected" {% end %}></option>
+                  <option value="pass" {% if status =="PASS" %} selected="selected" {% end %}>PASS</option>
+                  <option value="fail" {% if status =="FAIL" %} selected="selected" {% end %}>FAIL</option>
+                </select>
+                </div>
+              </div>
+              <div class="form-group" style="display: none">
+                 <input type="text" class="form-control" id="choice" name="choice" value="{{choice}}"/>
+              </div>
+
+              <div class="form-group col-md-6" style="padding-top: 20px; padding-left:32px">
+              <button id="search" type="submit" class="btn btn-default">查询</button>
+              </div>
+
+            </form>
+      </div>
+
+        
+      </div>
+      <div class="theme-popover">
+           <div class="theme-poptit">
+                <a href="javascript:;" title="关闭" class="close">×</a>
+                <h3 id="form_title">新增</h3>
+           </div>
+           <div id="daddform"class="theme-popbod dform">
+
+            <form method="get" name="addform" role="form" id="addform" action="">
+
+              <div class="form-group"><span style="color:red">*</span>别名：
+                 <input type="text" class="form-control" id="n_name" name="n_name" value="{{n_name}}"/>
+              </div>
+
+              <div class="form-group"><span style="color:red">*</span>监控命令：
+                <select class="form-control" name="n_command" id="n_command">
+                  <option value="" {% if n_command =="" %} selected="selected" {% end %}></option>
+                  <option value="curl" {% if n_command =="curl" %} selected="selected" {% end %}>curl</option>
+                  <option value="telnet" {% if n_command =="telnet" %} selected="selected" {% end %}>telnet</option>
+                  <option value="ping" {% if n_command =="ping" %} selected="selected" {% end %}>ping</option>
+                </select>
+              </div>
+
+              <div class="form-group" id="check_div_d"><span style="color:red">*</span>判断方式：
+                <select name="check_type" class="form-control" id="check_type">
+                  <option value="" {% if check_type =="" %} selected="selected" {% end %}></option>
+                  <option value="1" {% if check_type =="1" %} selected="selected" {% end %}>包含</option>
+                  <option value="2" {% if check_type =="2" %} selected="selected" {% end %}>等于</option>
+                  <option value="3" {% if check_type =="3" %} selected="selected" {% end %}>不包含</option>
+                </select>
+              </div>
+              <div class="form-group"><span style="color:red">*</span>开关状态：
+                <input type="radio" name='n_is_on' value="1" {% if n_is_on == "1" %} checked = "checked" {% end %}>开
+                <input type="radio" name='n_is_on' value="0" {% if n_is_on == "0" %} checked = "checked" {% end %}>关
+              </div>
+              <div class="form-group"><span style="color:red">*</span>API&服务：
+                <input type="text" class="form-control" id="url" name="url" value="{{url}}"/>
+              </div>
+              <div class="form-group" id="expected_result_d"><span style="color:red">*</span>验证值：
+                 <input type="text" class="form-control" id="expected_result" name="expected_result" value="{{expected_result}}"/>
+              </div>
+              <div class="form-group"><span style="color:red">*</span>email：
+                 <input type="text" class="form-control" id="email" name="email" value="{{email}}"/>
+              </div>
+              <div class="form-group" style="display: none">
+                 <input type="text" class="form-control" id="add_choice" name="add_choice" value="{{add_choice}}"/>
+              </div>
+              <div class="form-group" style="display: none">
+                 <input type="text" class="form-control" id="data_id" name="data_id" value="{{data_id}}"/>
+              </div>
+              <div class="button" id="add_new_div">
+              <button id="add_new" type="submit" class="btn btn-default">提交</button>
+              </div>
+            </form>
+          </div>
+      </div>
+
+
+
+     
+      <div class="outer-d">
+          <div class="table_title">
+            结果
+            <div class="theme-out" style="z-index: 999; position:absolute;top: 5px;left: 65px;">
+              <a id="add"><img src="../static/pics/add.png"></a>
+            </div>
+          </div>
+        
+          <div style="margin-top: 20px">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 3%">ID</th>
+                <th>别名</th>
+                <th style="width: 6%">监控命令</th>
+                <th>判断方式</th>
+                <th>开关状态</th>
+                <th style="width: 30%">服务</th>
+                <th style="width: 8%">验证值</th>
+                <th style="width: 6%">当前状态</th>
+                <th>检测时间</th>
+                <th style="width: 15%">email</th>
+                <th style="width: 8%">功能选择</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for i in p_result%}
+                <tr>
+                {%for j in i%}
+                    {% if not j or j==-1 or j=='-1'%}
+                    <td>
+                    </td>
+                    {%elif j=="FAIL"%}
+                    <td style="color: red; font-weight:bold">{{j}}
+                    </td>
+                    {%elif j=="PASS"%}
+                    <td style="color: green">{{j}}
+                    </td>
+                    {%else%}
+                    <td>{{j}}
+                    </td>
+                    {%end%}
+                {% end %}
+                <td>
+                       <a class="modify theme-out">修改<br></a>
+                       <a class="delete" >删除<br></a>
+                       <a class="history" href="" target="_blank">查看历史</a>
+                 </td>
+                 </tr>
+              {% end %}
+            </tbody>
+          </table>
+          </div>
+    <!--       <div id="page_number">
+            <ul class="pagination">
+              <li>
+                 <a href="#">Prev</a>
+              </li>
+              <li>
+                 <a href="#">1</a>
+              </li>
+              <li>
+                 <a href="#">2</a>
+              </li>
+              <li>
+                 <a href="#">3</a>
+              </li>
+              <li>
+                 <a href="#">4</a>
+              </li>
+              <li>
+                 <a href="#">5</a>
+              </li>
+              <li>
+                 <a href="#">Next</a>
+              </li>
+            </ul>
+          </div> -->
+        
+      
+    </div>
+    
+
+</div>
+
+</body>
+</html>
